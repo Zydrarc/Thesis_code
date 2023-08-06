@@ -3,7 +3,7 @@ library(stats)
 library(ggplot2)
 
 experiments = 5 # number of experiments run
-replicates = 10
+replicates = 20
 wd<-getwd()
 ## Evo of EQU
 
@@ -77,6 +77,17 @@ model_con <- glm(count ~ Connections, data = counts_con, family = poisson)
 
 # Print summary of the model
 summary(model_con)
+
+model <- drm(count ~ Connections, fct = L.3(), data = counts_con)
+summary(model)
+p7 <- plot(model, log = "", main = "Logistic function", xlab = "Number of trophic connections", ylab = "Number of time EQU evolved")
+print(p7)
+residuals <- resid(model)
+plot(predict(model), residuals)
+
+abline(h = 0, lty = 2)
+
+
 
 ##model validation
 
